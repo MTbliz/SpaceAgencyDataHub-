@@ -2,10 +2,7 @@ package com.example.spaceagency.service;
 
 import com.example.spaceagency.model.ImageryType;
 import com.example.spaceagency.model.Product;
-
-import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 public interface ProductService {
@@ -14,7 +11,7 @@ public interface ProductService {
 
     Product read(Long productId);
 
-    void update(Product product);
+    Product update(Product product);
 
     void delete(Long productId);
 
@@ -24,11 +21,11 @@ public interface ProductService {
 
     List<Product> getProductByType(ImageryType imageryType);
 
-    List<Product> getProductBetweenDates(LocalDateTime startDate, LocalDateTime endDate);
+    List<Product> getProductBetweenDates(ZonedDateTime startDate, ZonedDateTime endDate);
 
-    List<Product> getProductLessThenDate(LocalDateTime date);
+    List<Product> getProductLessThenDate(ZonedDateTime date);
 
-    List<Product> getProductGreaterThenDate(LocalDateTime date);
+    List<Product> getProductGreaterThenDate(ZonedDateTime date);
 
 
 }

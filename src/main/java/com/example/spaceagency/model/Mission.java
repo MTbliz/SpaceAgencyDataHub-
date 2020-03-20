@@ -1,11 +1,9 @@
 package com.example.spaceagency.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Set;
 
 @Entity
@@ -21,9 +19,11 @@ public class Mission {
     @Enumerated(EnumType.STRING)
     private ImageryType type;
 
-    private LocalDateTime startDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    private ZonedDateTime startDate;
 
-    private LocalDateTime finishDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    private ZonedDateTime finishDate;
 
     @OneToMany(mappedBy = "mission")
     private Set<Product> products;
@@ -40,11 +40,11 @@ public class Mission {
         return type;
     }
 
-    public LocalDateTime getStartDate() {
+    public ZonedDateTime getStartDate() {
         return startDate;
     }
 
-    public LocalDateTime getFinishDate() {
+    public ZonedDateTime getFinishDate() {
         return finishDate;
     }
 

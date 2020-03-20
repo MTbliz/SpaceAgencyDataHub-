@@ -8,7 +8,7 @@ public interface MissionService {
 
     Mission read(Long missionId);
 
-    void update(Mission mission) throws MissionAlredyExistException;
+    Mission update(Mission mission) throws MissionAlredyExistException;
 
     void delete(Long missionId);
 

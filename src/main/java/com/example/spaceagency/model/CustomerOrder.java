@@ -1,8 +1,9 @@
 package com.example.spaceagency.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.List;
+import java.time.ZonedDateTime;
 import java.util.Set;
 
 @Entity
@@ -13,20 +14,33 @@ public class CustomerOrder {
     @Column(name = "order_id")
     private Long id;
 
+    @ManyToOne()
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
     @ManyToMany()
     @JoinTable(
             name = "order_products",
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private Set<Product> products;
+    private Set<Product> productList;
 
-    private Customer customer;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    private ZonedDateTime orderDate = ZonedDateTime.now();
+
+    public Long getId() {
+        return id;
+    }
 
     public Set<Product> getProductList() {
-        return products;
+        return productList;
     }
 
     public Customer getCustomer() {
         return customer;
+    }
+
+    public ZonedDateTime getOrderDate() {
+        return orderDate;
     }
 }

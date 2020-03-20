@@ -12,28 +12,28 @@ public class ProductController {
     private final ProductService productService;
 
     @Autowired
-    public ProductController(ProductService productService){
+    public ProductController(ProductService productService) {
         this.productService = productService;
     }
 
     @RequestMapping()
-    public Iterable<Product> getAllProducts(){
+    public Iterable<Product> getAllProducts() {
         return productService.getAllProducts();
     }
 
     @RequestMapping("/{id}")
-    public Product getProduct(@PathVariable Long id){
+    public Product getProduct(@PathVariable Long id) {
         return productService.read(id);
     }
 
     @PostMapping()
-    public String createProduct(@RequestBody Product product){
+    public String createProduct(@RequestBody Product product) {
         productService.create(product);
         return "Product created";
     }
 
     @DeleteMapping("/{id}")
-    public String deleteProduct(@PathVariable Long id){
+    public String deleteProduct(@PathVariable Long id) {
         productService.delete(id);
         return "Product deleted";
     }

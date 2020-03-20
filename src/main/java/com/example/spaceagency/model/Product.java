@@ -1,17 +1,15 @@
 package com.example.spaceagency.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 
 @Entity
-public class Product  {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,8 +20,12 @@ public class Product  {
     @JoinColumn(name = "mission_id", nullable = false)
     private Mission mission;
 
-    private LocalDateTime acquisitionDAte;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    private ZonedDateTime acquisitionDAte;
 
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "footprint_id", referencedColumnName = "footprint_id")
     private Footprint footprint;
 
     private BigDecimal price;
@@ -39,7 +41,7 @@ public class Product  {
         return mission;
     }
 
-    public LocalDateTime getAcquisitionDAte() {
+    public ZonedDateTime getAcquisitionDAte() {
         return acquisitionDAte;
     }
 
@@ -54,5 +56,4 @@ public class Product  {
     public String getUrl() {
         return url;
     }
-
 }

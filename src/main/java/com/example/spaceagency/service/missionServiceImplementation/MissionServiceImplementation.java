@@ -1,4 +1,4 @@
-package com.example.spaceagency.service.MissionServiceImplementation;
+package com.example.spaceagency.service.missionServiceImplementation;
 
 import com.example.spaceagency.exception.MissionAlredyExistException;
 import com.example.spaceagency.model.Mission;
@@ -17,14 +17,14 @@ public class MissionServiceImplementation implements MissionService {
     private final MissionRepository missionRepository;
 
     @Autowired
-    public MissionServiceImplementation(MissionRepository missionRepository){
+    public MissionServiceImplementation(MissionRepository missionRepository) {
         this.missionRepository = missionRepository;
     }
 
     @Override
     public Mission create(Mission mission) throws MissionAlredyExistException {
         List<Mission> missions = missionRepository.findAllByName(mission.getName());
-        if(missions.size()==0) {
+        if (missions.size() == 0) {
             return missionRepository.save(mission);
         } else {
             throw new MissionAlredyExistException("Mission already exist");
@@ -38,11 +38,11 @@ public class MissionServiceImplementation implements MissionService {
     }
 
     @Override
-    public void update(Mission mission) throws MissionAlredyExistException {
+    public Mission update(Mission mission) throws MissionAlredyExistException {
         List<Mission> missions = missionRepository.findAllByName(mission.getName());
-       Optional<Mission> missionById = missionRepository.findById(mission.getId());
-        if(missions.size()==0 ||missionById.get().getName() == (mission.getName())) {
-            missionRepository.save(mission);
+        Optional<Mission> missionById = missionRepository.findById(mission.getId());
+        if (missions.size() == 0 || missionById.get().getName().equals(mission.getName())) {
+            return missionRepository.save(mission);
         } else {
             throw new MissionAlredyExistException("Mission already exist");
         }

@@ -1,19 +1,28 @@
 package com.example.spaceagency.model;
 
+import javax.persistence.*;
+
+@Entity
 public class Coordinate {
-    private int x;
-    private int y;
 
-    public Coordinate(int x, int y) {
-        this.x = x;
-        this.y = y;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "coordinate_id")
+    private Long id;
+
+    private double latitude;
+
+    private double longitude;
+
+    public Long getId() {
+        return id;
     }
 
-    public int getX() {
-        return x;
+    public double getLatitude() {
+        return latitude;
     }
 
-    public int getY() {
-        return y;
+    public double getLongitude() {
+        return longitude;
     }
 }
