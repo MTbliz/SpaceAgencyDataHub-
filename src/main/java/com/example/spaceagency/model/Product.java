@@ -2,11 +2,9 @@ package com.example.spaceagency.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
-
 
 @Entity
 public class Product {
@@ -32,6 +30,17 @@ public class Product {
 
     @JsonIgnore
     private String url;
+
+    public Product() {
+    }
+
+    public Product(Mission mission, ZonedDateTime acquisitionDAte, Footprint footprint, BigDecimal price, String url) {
+        this.mission=mission;
+        this.acquisitionDAte=acquisitionDAte;
+        this.footprint=footprint;
+        this.price=price;
+        this.url=url;
+    }
 
     public Long getId() {
         return id;

@@ -1,8 +1,6 @@
 package com.example.spaceagency.service;
 
-import com.example.spaceagency.model.Customer;
 import com.example.spaceagency.model.CustomerOrder;
-
 import java.util.List;
 
 public interface OrderService {

@@ -1,7 +1,6 @@
 package com.example.spaceagency.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import java.time.ZonedDateTime;
 import java.util.Set;
@@ -27,6 +26,15 @@ public class CustomerOrder {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     private ZonedDateTime orderDate = ZonedDateTime.now();
+
+    public CustomerOrder() {
+    }
+
+    public CustomerOrder(Customer customer, Set<Product> productList, ZonedDateTime orderDate) {
+        this.customer=customer;
+        this.productList=productList;
+        this.orderDate=orderDate;
+    }
 
     public Long getId() {
         return id;

@@ -1,6 +1,7 @@
 package com.example.spaceagency.controller;
 
 import com.example.spaceagency.model.Product;
+import com.example.spaceagency.model.ProductDTO;
 import com.example.spaceagency.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,8 +28,8 @@ public class ProductController {
     }
 
     @PostMapping()
-    public String createProduct(@RequestBody Product product) {
-        productService.create(product);
+    public String createProduct(@RequestBody ProductDTO productDTO) {
+        productService.create(productDTO.transferProductDTOtoProduct());
         return "Product created";
     }
 

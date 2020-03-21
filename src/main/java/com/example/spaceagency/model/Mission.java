@@ -1,7 +1,6 @@
 package com.example.spaceagency.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import java.time.ZonedDateTime;
 import java.util.Set;
@@ -25,7 +24,7 @@ public class Mission {
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     private ZonedDateTime finishDate;
 
-    @OneToMany(mappedBy = "mission")
+    @OneToMany(mappedBy = "mission", cascade = CascadeType.REMOVE)
     private Set<Product> products;
 
     public Long getId() {
@@ -47,5 +46,4 @@ public class Mission {
     public ZonedDateTime getFinishDate() {
         return finishDate;
     }
-
 }

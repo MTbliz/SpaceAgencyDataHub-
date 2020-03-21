@@ -2,7 +2,6 @@ package com.example.spaceagency.repository;
 
 import com.example.spaceagency.model.Customer;
 import com.example.spaceagency.model.CustomerOrder;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,8 +1,7 @@
 package com.example.spaceagency.model;
 
 import javax.persistence.*;
-import java.util.Set;
-
+import java.util.List;
 
 @Entity
 public class Footprint {
@@ -12,15 +11,22 @@ public class Footprint {
     @Column(name = "footprint_id")
     private Long id;
 
-    @OneToMany(cascade=CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn
-    private Set<Coordinate> coordinates;
+    private List<Coordinate> coordinates;
 
+    public Footprint() {
+    }
+
+    public Footprint(Long id, List<Coordinate> coordinates) {
+        this.id=id;
+        this.coordinates=coordinates;
+    }
     public Long getId() {
         return id;
     }
 
-    public Set<Coordinate> getCoordinates() {
+    public List<Coordinate> getCoordinates() {
         return coordinates;
     }
 }

@@ -28,8 +28,10 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/missions**", "/products**").hasRole("CONTENTMANAGER")
                 .antMatchers("/search/**").permitAll()
+                .antMatchers("/orders").denyAll()
+                .antMatchers("/missions**","/missions/**", "/products**","/products/**").hasRole("CONTENTMANAGER")
+                .antMatchers("/orders/search/customer","/orders/create").hasRole("CUSTOMER")
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();

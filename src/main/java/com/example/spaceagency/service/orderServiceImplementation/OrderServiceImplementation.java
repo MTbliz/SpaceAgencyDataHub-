@@ -1,6 +1,5 @@
 package com.example.spaceagency.service.orderServiceImplementation;
 
-import com.example.spaceagency.model.Customer;
 import com.example.spaceagency.model.CustomerOrder;
 import com.example.spaceagency.repository.OrderRepository;
 import com.example.spaceagency.service.OrderService;

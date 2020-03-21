@@ -1,11 +1,9 @@
 package com.example.spaceagency.controller;
 
-import com.example.spaceagency.model.Customer;
 import com.example.spaceagency.model.CustomerOrder;
 import com.example.spaceagency.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -24,12 +22,12 @@ public class OrderController {
         return orderService.getAllOrders();
     }
 
-    @RequestMapping("/customer")
+    @RequestMapping("/search/customer")
     public List<CustomerOrder> getOrdersByCustomer(@RequestParam String firstName, @RequestParam String lastName) {
         return orderService.getOrdersByCustomer(firstName, lastName);
     }
 
-    @PostMapping()
+    @PostMapping("/create")
     public String createOrder(@RequestBody CustomerOrder customerOrder) {
         orderService.create(customerOrder);
         return "Order Created";

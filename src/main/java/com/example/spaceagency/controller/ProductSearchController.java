@@ -8,7 +8,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -35,18 +34,23 @@ public class ProductSearchController {
 
     @RequestMapping("/betweenDates")
     public List<Product> getProductsBetweenDates(
-            @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ") ZonedDateTime startDate,
-            @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ") ZonedDateTime endDate) {
+            @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime startDate,
+            @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime endDate) {
         return productService.getProductBetweenDates(startDate, endDate);
     }
 
     @RequestMapping("/greaterThenDate")
-    public List<Product> getProductsGreaterThenDate(@RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ") ZonedDateTime date) {
+    public List<Product> getProductsGreaterThenDate(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime date) {
         return productService.getProductGreaterThenDate(date);
     }
 
     @RequestMapping("/lessThenDate")
-    public List<Product> getProductsLessThenDate(@RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ") ZonedDateTime date) {
+    public List<Product> getProductsLessThenDate(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime date) {
         return productService.getProductLessThenDate(date);
+    }
+
+    @RequestMapping("/footprint")
+    public List<Product> getProductByCoordinate(@RequestParam(value = "latitude") double latitude, @RequestParam(value = "longitude") double longitude) {
+        return productService.getProductByFootprintCoordinate(latitude, longitude);
     }
 }

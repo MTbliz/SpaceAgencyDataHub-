@@ -1,12 +1,10 @@
 package com.example.spaceagency.service.productServiceImplementation;
 
-import com.example.spaceagency.model.ImageryType;
-import com.example.spaceagency.model.Product;
+import com.example.spaceagency.model.*;
 import com.example.spaceagency.repository.ProductRepository;
 import com.example.spaceagency.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -72,5 +70,11 @@ public class ProductServiceImplementation implements ProductService {
     @Override
     public List<Product> getProductGreaterThenDate(ZonedDateTime date) {
         return productRepository.findByMissionGreaterThan(date);
+    }
+
+    @Override
+    public List<Product> getProductByFootprintCoordinate(double latitude, double longitude) {
+        List<Product> products = productRepository.findByFootprint_Coordinates(latitude,longitude);
+        return products;
     }
 }
