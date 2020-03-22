@@ -16,10 +16,10 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-                .withUser("user1").password(passwordEncoder().encode("123456"))
+                .withUser("customer").password(passwordEncoder().encode("123456"))
                 .roles("CUSTOMER")
                 .and()
-                .withUser("user2").password(passwordEncoder().encode("123456"))
+                .withUser("contentmanager").password(passwordEncoder().encode("123456"))
                 .roles("CONTENTMANAGER");
     }
 
@@ -30,7 +30,7 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
                 .authorizeRequests()
                 .antMatchers("/search/**").permitAll()
                 .antMatchers("/orders").denyAll()
-                .antMatchers("/missions**","/missions/**", "/products**","/products/**").hasRole("CONTENTMANAGER")
+                .antMatchers("/configuration","/missions**","/missions/**", "/products**","/products/**").hasRole("CONTENTMANAGER")
                 .antMatchers("/orders/search/customer","/orders/create").hasRole("CUSTOMER")
                 .anyRequest().authenticated()
                 .and()

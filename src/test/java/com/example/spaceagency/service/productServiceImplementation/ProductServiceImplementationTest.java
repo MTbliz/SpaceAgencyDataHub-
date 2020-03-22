@@ -126,4 +126,12 @@ class ProductServiceImplementationTest {
                 .thenReturn(Stream.of(new Product()).collect(Collectors.toList()));
         Assertions.assertEquals(1, productService.getProductByFootprintCoordinate(latitude,longitude).size());
     }
+
+    @Test
+    void getMostOrderedProductsTest(){
+
+        when(productRepository.findMostOrdered())
+                .thenReturn(Stream.of(new Product()).collect(Collectors.toList()));
+        Assertions.assertEquals(1, productService.getMostOrderedProducts().size());
+    }
 }

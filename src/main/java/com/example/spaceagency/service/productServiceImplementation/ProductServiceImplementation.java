@@ -77,4 +77,9 @@ public class ProductServiceImplementation implements ProductService {
         List<Product> products = productRepository.findByFootprint_Coordinates(latitude,longitude);
         return products;
     }
+
+    @Override
+    public List<Product> getMostOrderedProducts() {
+        return productRepository.findMostOrdered();
+    }
 }

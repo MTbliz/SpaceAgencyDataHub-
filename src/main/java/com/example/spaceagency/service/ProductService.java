@@ -28,4 +28,6 @@ public interface ProductService {
     List<Product> getProductGreaterThenDate(ZonedDateTime date);
 
     List<Product> getProductByFootprintCoordinate(double latitude, double longitude);
+
+    List<Product> getMostOrderedProducts();
 }
