@@ -21,7 +21,8 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     }
 
     @ExceptionHandler(value
-            = {IllegalArgumentException.class, IllegalStateException.class, NullPointerException.class, NoSuchElementException.class, JsonProcessingException.class})
+            = {IllegalArgumentException.class, IllegalStateException.class, NullPointerException.class
+            , NoSuchElementException.class, JsonProcessingException.class})
     protected ResponseEntity<Object> handleConflict(
             RuntimeException ex, WebRequest request) {
         String bodyOfResponse = ex.getMessage();

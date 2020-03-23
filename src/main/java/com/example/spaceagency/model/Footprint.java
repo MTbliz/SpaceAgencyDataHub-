@@ -19,9 +19,10 @@ public class Footprint {
     }
 
     public Footprint(Long id, List<Coordinate> coordinates) {
-        this.id=id;
-        this.coordinates=coordinates;
+        this.id = id;
+        this.coordinates = coordinates;
     }
+
     public Long getId() {
         return id;
     }

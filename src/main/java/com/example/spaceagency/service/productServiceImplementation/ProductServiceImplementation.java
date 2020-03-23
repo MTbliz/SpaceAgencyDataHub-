@@ -74,7 +74,7 @@ public class ProductServiceImplementation implements ProductService {
 
     @Override
     public List<Product> getProductByFootprintCoordinate(double latitude, double longitude) {
-        List<Product> products = productRepository.findByFootprint_Coordinates(latitude,longitude);
+        List<Product> products = productRepository.findByFootprint_Coordinates(latitude, longitude);
         return products;
     }
 

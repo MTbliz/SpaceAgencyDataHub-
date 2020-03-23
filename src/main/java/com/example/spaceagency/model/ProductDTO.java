@@ -20,11 +20,11 @@ public class ProductDTO {
     private String url;
 
     public ProductDTO(Mission mission, ZonedDateTime acquisitionDAte, FootprintDTO footprint, BigDecimal price, String url) {
-        this.mission=mission;
-        this.acquisitionDAte=acquisitionDAte;
-        this.footprint=footprint;
-        this.price=price;
-        this.url=url;
+        this.mission = mission;
+        this.acquisitionDAte = acquisitionDAte;
+        this.footprint = footprint;
+        this.price = price;
+        this.url = url;
     }
 
     public Long getId() {

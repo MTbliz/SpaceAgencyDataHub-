@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
-
 @RestController
 @RequestMapping("/missions")
 public class MissionController {
@@ -37,12 +36,12 @@ public class MissionController {
 
     @PostMapping()
     public String createMission(@RequestBody Mission mission) {
-        try{
+        try {
             LOG.info("createMission method");
             missionService.create(mission);
             return "Mission created";
-        } catch (MissionAlredyExistException e){
-          return e.getMessage();
+        } catch (MissionAlredyExistException e) {
+            return e.getMessage();
         }
     }
 

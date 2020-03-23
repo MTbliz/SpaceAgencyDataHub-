@@ -35,11 +35,11 @@ public class Product {
     }
 
     public Product(Mission mission, ZonedDateTime acquisitionDAte, Footprint footprint, BigDecimal price, String url) {
-        this.mission=mission;
-        this.acquisitionDAte=acquisitionDAte;
-        this.footprint=footprint;
-        this.price=price;
-        this.url=url;
+        this.mission = mission;
+        this.acquisitionDAte = acquisitionDAte;
+        this.footprint = footprint;
+        this.price = price;
+        this.url = url;
     }
 
     public Long getId() {

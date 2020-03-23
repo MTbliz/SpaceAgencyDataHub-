@@ -30,8 +30,8 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
                 .authorizeRequests()
                 .antMatchers("/search/**").permitAll()
                 .antMatchers("/orders").denyAll()
-                .antMatchers("/configuration","/missions**","/missions/**", "/products**","/products/**").hasRole("CONTENTMANAGER")
-                .antMatchers("/orders/search/customer","/orders/create").hasRole("CUSTOMER")
+                .antMatchers("/configuration", "/missions**", "/missions/**", "/products**", "/products/**").hasRole("CONTENTMANAGER")
+                .antMatchers("/orders/search/customer", "/orders/create").hasRole("CUSTOMER")
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();

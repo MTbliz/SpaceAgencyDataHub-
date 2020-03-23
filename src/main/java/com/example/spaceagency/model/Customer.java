@@ -18,8 +18,8 @@ public class Customer {
     }
 
     public Customer(String firstName, String lastName) {
-        this.firstName=firstName;
-        this.lastName=lastName;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public Long getId() {

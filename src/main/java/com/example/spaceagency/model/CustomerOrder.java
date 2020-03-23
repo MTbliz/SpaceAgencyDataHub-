@@ -31,9 +31,9 @@ public class CustomerOrder {
     }
 
     public CustomerOrder(Customer customer, Set<Product> productList, ZonedDateTime orderDate) {
-        this.customer=customer;
-        this.productList=productList;
-        this.orderDate=orderDate;
+        this.customer = customer;
+        this.productList = productList;
+        this.orderDate = orderDate;
     }
 
     public Long getId() {
