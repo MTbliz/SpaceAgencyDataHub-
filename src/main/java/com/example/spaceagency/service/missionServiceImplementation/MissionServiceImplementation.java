@@ -1,5 +1,6 @@
 package com.example.spaceagency.service.missionServiceImplementation;
 
+import com.example.spaceagency.exception.FileDbStorageException;
 import com.example.spaceagency.exception.MissionAlredyExistException;
 import com.example.spaceagency.model.Mission;
 import com.example.spaceagency.repository.MissionRepository;
@@ -20,8 +21,12 @@ public class MissionServiceImplementation implements MissionService {
     }
 
     @Override
-    public Mission create(Mission mission) throws MissionAlredyExistException {
-        List<Mission> missions = missionRepository.findAllByName(mission.getName());
+    public Mission create(Mission mission) throws MissionAlredyExistException, FileDbStorageException {
+        // Check if the file's name contains invalid characters
+        if (mission.getName().contains("..")) {
+            throw new FileDbStorageException("Sorry! Filename contains invalid path sequence " + mission.getName());
+        }
+            List<Mission> missions = missionRepository.findAllByName(mission.getName());
         if (missions.size() == 0) {
             return missionRepository.save(mission);
         } else {

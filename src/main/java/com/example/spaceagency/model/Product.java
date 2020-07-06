@@ -19,7 +19,7 @@ public class Product {
     private Mission mission;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-    private ZonedDateTime acquisitionDAte;
+    private ZonedDateTime acquisitionDate;
 
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -28,18 +28,30 @@ public class Product {
 
     private BigDecimal price;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn
+    private FileDb fileDb;
+
     @JsonIgnore
     private String url;
 
     public Product() {
     }
 
-    public Product(Mission mission, ZonedDateTime acquisitionDAte, Footprint footprint, BigDecimal price, String url) {
+    public Product(Mission mission, ZonedDateTime acquisitionDate, Footprint footprint, BigDecimal price, FileDb fileDb, String url) {
         this.mission = mission;
-        this.acquisitionDAte = acquisitionDAte;
+        this.acquisitionDate = acquisitionDate;
         this.footprint = footprint;
         this.price = price;
+        this.fileDb = fileDb;
         this.url = url;
+    }
+
+    public Product(Mission mission, ZonedDateTime acquisitionDate, Footprint footprint, BigDecimal price) {
+        this.mission = mission;
+        this.acquisitionDate = acquisitionDate;
+        this.footprint = footprint;
+        this.price = price;
     }
 
     public Long getId() {
@@ -50,8 +62,8 @@ public class Product {
         return mission;
     }
 
-    public ZonedDateTime getAcquisitionDAte() {
-        return acquisitionDAte;
+    public ZonedDateTime getAcquisitionDate() {
+        return acquisitionDate;
     }
 
     public Footprint getFootprint() {
@@ -60,6 +72,10 @@ public class Product {
 
     public BigDecimal getPrice() {
         return price;
+    }
+
+    public FileDb getFileDb() {
+        return fileDb;
     }
 
     public String getUrl() {

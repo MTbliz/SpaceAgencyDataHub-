@@ -1,6 +1,9 @@
 package com.example.spaceagency.service.missionServiceImplementation;
 
+import com.example.spaceagency.exception.FileDbStorageException;
 import com.example.spaceagency.exception.MissionAlredyExistException;
+import com.example.spaceagency.model.FileDb;
+import com.example.spaceagency.model.ImageryType;
 import com.example.spaceagency.model.Mission;
 import com.example.spaceagency.repository.MissionRepository;
 import com.example.spaceagency.service.MissionService;
@@ -11,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -33,8 +38,9 @@ class MissionServiceImplementationTest {
 
 
     @Test
-    void createTest() throws MissionAlredyExistException {
-        Mission mission = new Mission();
+    void createTest() throws MissionAlredyExistException, FileDbStorageException {
+        Mission mission = new Mission("test.pdf", ImageryType.TYPE_HYPERSPECTRAL, ZonedDateTime.parse("2016-09-13T22:30:52.123+02:00"),
+                ZonedDateTime.parse("2016-09-13T22:30:52.123+02:00"), new FileDb());
         when(missionRepository.save(mission)).thenReturn(mission);
         Assertions.assertEquals(mission,missionService.create(mission));
     }

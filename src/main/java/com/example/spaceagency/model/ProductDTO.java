@@ -1,5 +1,7 @@
 package com.example.spaceagency.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
@@ -7,36 +9,34 @@ import java.util.List;
 
 public class ProductDTO {
 
-    private Long id;
-
     private Mission mission;
 
-    private ZonedDateTime acquisitionDAte;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    private ZonedDateTime acquisitionDate;
 
     private FootprintDTO footprint;
 
     private BigDecimal price;
 
+    private FileDb fileDb;
+
     private String url;
 
-    public ProductDTO(Mission mission, ZonedDateTime acquisitionDAte, FootprintDTO footprint, BigDecimal price, String url) {
+    public ProductDTO(Mission mission, ZonedDateTime acquisitionDate, FootprintDTO footprint, BigDecimal price, FileDb fileDb, String url) {
         this.mission = mission;
-        this.acquisitionDAte = acquisitionDAte;
+        this.acquisitionDate = acquisitionDate;
         this.footprint = footprint;
         this.price = price;
+        this.fileDb = fileDb;
         this.url = url;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public Mission getMission() {
         return mission;
     }
 
-    public ZonedDateTime getAcquisitionDAte() {
-        return acquisitionDAte;
+    public ZonedDateTime getAcquisitionDate() {
+        return acquisitionDate;
     }
 
     public FootprintDTO getFootprint() {
@@ -45,6 +45,10 @@ public class ProductDTO {
 
     public BigDecimal getPrice() {
         return price;
+    }
+
+    public FileDb getFileDb() {
+        return fileDb;
     }
 
     public String getUrl() {
@@ -63,9 +67,10 @@ public class ProductDTO {
 
         Product product = new Product(
                 this.getMission(),
-                this.getAcquisitionDAte(),
+                this.getAcquisitionDate(),
                 footprint,
                 this.getPrice(),
+                this.getFileDb(),
                 this.getUrl());
         return product;
     }

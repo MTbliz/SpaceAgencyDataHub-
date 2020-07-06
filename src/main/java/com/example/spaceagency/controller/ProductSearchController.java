@@ -29,13 +29,13 @@ public class ProductSearchController {
 
     @RequestMapping("/missionName")
     public List<Product> getProductsByMissionName(@RequestParam(value = "missionName") String missionName) {
-        LOG.info("Info log in our getProductsByMissionName method");
+        LOG.info("All products filtered by MissionName received.");
         return productService.getProductByMissionName(missionName);
     }
 
     @RequestMapping("/type")
     public List<Product> getProductsByProductType(ImageryType productType) {
-        LOG.info("Info log in our getProductsByProductType method");
+        LOG.info("All products filtered by ProductType received.");
         return productService.getProductByType(productType);
     }
 
@@ -43,31 +43,31 @@ public class ProductSearchController {
     public List<Product> getProductsBetweenDates(
             @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime startDate,
             @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime endDate) {
-        LOG.info("Info log in our getProductsBetweenDates method");
+        LOG.info("All products between startDate: " + startDate + " and endDate: " + endDate + " received.");
         return productService.getProductBetweenDates(startDate, endDate);
     }
 
     @RequestMapping("/greaterThenDate")
     public List<Product> getProductsGreaterThenDate(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime date) {
-        LOG.info("Info log in our getProductsGreaterThenDate method");
+        LOG.info("All products with date greater then date: " + date + " received.");
         return productService.getProductGreaterThenDate(date);
     }
 
     @RequestMapping("/lessThenDate")
     public List<Product> getProductsLessThenDate(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime date) {
-        LOG.info("Info log in our getProductsLessThenDate method");
+        LOG.info("All products with date less then date: " + date + " received.");
         return productService.getProductLessThenDate(date);
     }
 
     @RequestMapping("/footprint")
     public List<Product> getProductByCoordinate(@RequestParam(value = "latitude") double latitude, @RequestParam(value = "longitude") double longitude) {
-        LOG.info("Info log in our getProductByCoordinate method");
+        LOG.info("All products filtered by latitude: " + latitude + " and longitude: " + longitude + " received.");
         return productService.getProductByFootprintCoordinate(latitude, longitude);
     }
 
     @RequestMapping("/mostordered")
     public List<Product> getMostOrderedProduct() {
-        LOG.info("Info log in our getMostOrderedProduct method");
+        LOG.info("Most ordered products received.");
         return productService.getMostOrderedProducts();
     }
 }

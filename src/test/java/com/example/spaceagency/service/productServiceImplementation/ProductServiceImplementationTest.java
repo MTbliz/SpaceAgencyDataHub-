@@ -1,8 +1,8 @@
 package com.example.spaceagency.service.productServiceImplementation;
 
-import com.example.spaceagency.model.CustomerOrder;
-import com.example.spaceagency.model.ImageryType;
-import com.example.spaceagency.model.Product;
+import com.example.spaceagency.exception.FileDbStorageException;
+import com.example.spaceagency.exception.ProductNotFoundException;
+import com.example.spaceagency.model.*;
 import com.example.spaceagency.repository.OrderRepository;
 import com.example.spaceagency.repository.ProductRepository;
 import com.example.spaceagency.service.ProductService;
@@ -12,8 +12,12 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
@@ -39,10 +43,17 @@ class ProductServiceImplementationTest {
     ProductRepository productRepository;
 
     @Test
-    void createTest() {
-        Product product = new Product();
+    void createTest() throws FileDbStorageException, IOException {
+
+        byte[] fileContent = "bar".getBytes(StandardCharsets.UTF_8);
+        MockMultipartFile filePart = new MockMultipartFile("file", "orig", null, fileContent);
+        FileDb fileDb = new FileDb("Test File", filePart.getContentType(), filePart.getBytes());
+
+        Product product = new Product(new Mission(), ZonedDateTime.parse("2016-09-13T22:30:52.123+02:00"),
+                new Footprint(), BigDecimal.ONE, fileDb, "url");
+
         when(productRepository.save(product)).thenReturn(product);
-        Assertions.assertEquals(product,productService.create(product));
+        Assertions.assertEquals(product, productService.create(product));
     }
 
     @Test
@@ -55,17 +66,24 @@ class ProductServiceImplementationTest {
     }
 
     @Test
-    void updateTest() {
-        Product product = new Product();
+    void updateTest() throws FileDbStorageException, IOException {
+
+        byte[] fileContent = "bar".getBytes(StandardCharsets.UTF_8);
+        MockMultipartFile filePart = new MockMultipartFile("file", "orig", null, fileContent);
+        FileDb fileDb = new FileDb("Test File", filePart.getContentType(), filePart.getBytes());
+
+        Product product = new Product(new Mission(), ZonedDateTime.parse("2016-09-13T22:30:52.123+02:00"),
+                new Footprint(), BigDecimal.ONE, fileDb, "url");
+
         when(productRepository.save(product)).thenReturn(product);
-        Assertions.assertEquals(product,productService.create(product));
+        Assertions.assertEquals(product, productService.create(product));
     }
 
     @Test
     void deleteTest() {
         long id = 1;
         productService.delete(id);
-        verify(productRepository,times(1)).deleteById((long) 1);
+        verify(productRepository, times(1)).deleteById((long) 1);
     }
 
     @Test
@@ -75,7 +93,7 @@ class ProductServiceImplementationTest {
         products.add(product);
         Iterable<Product> iterable = products;
         when(productRepository.findAll()).thenReturn(iterable);
-        Assertions.assertEquals(1,((List<Product>) productService.getAllProducts()).size());
+        Assertions.assertEquals(1, ((List<Product>) productService.getAllProducts()).size());
     }
 
     @Test
@@ -97,9 +115,9 @@ class ProductServiceImplementationTest {
     void getProductBetweenDatesTest() {
         ZonedDateTime startDate = ZonedDateTime.now();
         ZonedDateTime endDate = ZonedDateTime.now().plusDays(1);
-        when(productRepository.findByMissionBetween(startDate,endDate))
+        when(productRepository.findByMissionBetween(startDate, endDate))
                 .thenReturn(Stream.of(new Product()).collect(Collectors.toList()));
-        Assertions.assertEquals(1, productService.getProductBetweenDates(startDate,endDate).size());
+        Assertions.assertEquals(1, productService.getProductBetweenDates(startDate, endDate).size());
     }
 
     @Test
@@ -119,19 +137,38 @@ class ProductServiceImplementationTest {
     }
 
     @Test
-    void getProductByFootprintCoordinateTest(){
+    void getProductByFootprintCoordinateTest() {
         double latitude = 1.0;
         double longitude = 1.0;
-        when(productRepository.findByFootprint_Coordinates(latitude,longitude))
+        when(productRepository.findByFootprint_Coordinates(latitude, longitude))
                 .thenReturn(Stream.of(new Product()).collect(Collectors.toList()));
-        Assertions.assertEquals(1, productService.getProductByFootprintCoordinate(latitude,longitude).size());
+        Assertions.assertEquals(1, productService.getProductByFootprintCoordinate(latitude, longitude).size());
     }
 
     @Test
-    void getMostOrderedProductsTest(){
+    void getMostOrderedProductsTest() {
 
         when(productRepository.findMostOrdered())
                 .thenReturn(Stream.of(new Product()).collect(Collectors.toList()));
         Assertions.assertEquals(1, productService.getMostOrderedProducts().size());
     }
+
+    @Test
+    void updateProductURL() {
+        long id = 1;
+        String url = "url";
+        productService.updateProductURL(id, url);
+        verify(productRepository, times(1)).updateProductURL(id, url);
+        ;
+    }
+
+    @Test
+    void getProductByURL() throws ProductNotFoundException {
+        String url="url";
+        Product product = new Product(new Mission(), ZonedDateTime.parse("2016-09-13T22:30:52.123+02:00"),
+                new Footprint(), BigDecimal.ONE, new FileDb(), url);
+        when(productRepository.findByUrl(url)).thenReturn(Optional.of(product));
+        Assertions.assertEquals("url", productService.getProductByURL(url).getUrl());
+    }
+
 }

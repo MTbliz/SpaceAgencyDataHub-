@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
@@ -26,8 +28,9 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
+                .cors().and().csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/**").permitAll()
                 .antMatchers("/search/**").permitAll()
                 .antMatchers("/orders").denyAll()
                 .antMatchers("/configuration", "/missions**", "/missions/**", "/products**", "/products/**").hasRole("CONTENTMANAGER")
@@ -40,5 +43,16 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**").allowedOrigins("http://localhost:4200").allowedMethods("POST", "GET", "PUT", "DELETE")
+                        .exposedHeaders("Content-Disposition");
+            }
+        };
     }
 }

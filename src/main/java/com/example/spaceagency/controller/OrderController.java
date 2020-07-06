@@ -24,20 +24,20 @@ public class OrderController {
 
     @RequestMapping()
     public Iterable<CustomerOrder> getAllOrders() {
-        LOG.info("Info log in our getAllOrders method");
+        LOG.info("All orders received.");
         return orderService.getAllOrders();
     }
 
     @RequestMapping("/search/customer")
     public List<CustomerOrder> getOrdersByCustomer(@RequestParam String firstName, @RequestParam String lastName) {
-        LOG.info("getOrdersByCustomer");
+        LOG.info("All orders for customer received.");
         return orderService.getOrdersByCustomer(firstName, lastName);
     }
 
     @PostMapping("/create")
-    public String createOrder(@RequestBody CustomerOrder customerOrder) {
-        orderService.create(customerOrder);
-        LOG.info("Info log in our createOrder method");
-        return "Order Created";
+    public CustomerOrder createOrder(@RequestBody CustomerOrder customerOrder) {
+        CustomerOrder createdOrder = orderService.create(customerOrder);
+        LOG.info("Order with id: " + createdOrder.getId() +  " created.");
+        return createdOrder;
     }
 }
