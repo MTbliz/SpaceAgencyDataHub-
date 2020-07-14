@@ -7,6 +7,8 @@ import com.example.spaceagency.repository.MissionRepository;
 import com.example.spaceagency.service.MissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -41,6 +43,7 @@ public class MissionServiceImplementation implements MissionService {
     }
 
     @Override
+    @Transactional
     public Mission update(Mission mission) throws MissionAlredyExistException {
         List<Mission> missions = missionRepository.findAllByName(mission.getName());
         Optional<Mission> missionById = missionRepository.findById(mission.getId());

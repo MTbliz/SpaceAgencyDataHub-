@@ -1,10 +1,10 @@
 package com.example.spaceagency.configuration.security.services;
 
-import com.example.spaceagency.model.User.ERole;
-import com.example.spaceagency.model.User.Role;
-import com.example.spaceagency.model.User.User;
+import com.example.spaceagency.model.securityuser.ERole;
+import com.example.spaceagency.model.securityuser.Role;
+import com.example.spaceagency.model.securityuser.SecurityUser;
 import com.example.spaceagency.repository.RoleRepository;
-import com.example.spaceagency.repository.UserRepository;
+import com.example.spaceagency.repository.SecurityUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,17 +14,17 @@ import java.util.Set;
 @Component
 public class RegisterServiceValidator {
 
-    private UserRepository userRepository;
+    private SecurityUserRepository securityUserRepository;
 
     private RoleRepository roleRepository;
 
     @Autowired
-    public RegisterServiceValidator(UserRepository userRepository, RoleRepository roleRepository){
-        this.userRepository = userRepository;
+    public RegisterServiceValidator(SecurityUserRepository securityUserRepository, RoleRepository roleRepository){
+        this.securityUserRepository = securityUserRepository;
         this.roleRepository = roleRepository;
     }
 
-    public void onSaveUserRolesValidate(User user, Set<String> strRoles) throws RuntimeException {
+    public void onSaveUserRolesValidate(SecurityUser securityUser, Set<String> strRoles) throws RuntimeException {
         Set<Role> roles = new HashSet<>();
 
         if (strRoles == null) {
@@ -53,7 +53,7 @@ public class RegisterServiceValidator {
                 }
             });
         }
-        user.setRoles(roles);
-        userRepository.save(user);
+        securityUser.setRoles(roles);
+        securityUserRepository.save(securityUser);
     }
 }

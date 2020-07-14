@@ -1,7 +1,7 @@
 package com.example.spaceagency.repository;
 
-import com.example.spaceagency.model.User.ERole;
-import com.example.spaceagency.model.User.Role;
+import com.example.spaceagency.model.securityuser.ERole;
+import com.example.spaceagency.model.securityuser.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

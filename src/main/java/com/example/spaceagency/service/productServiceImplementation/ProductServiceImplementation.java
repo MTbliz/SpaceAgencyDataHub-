@@ -55,39 +55,46 @@ public class ProductServiceImplementation implements ProductService {
     }
 
     @Override
+    @Transactional
     public List<Product> getProductByMissionName(String missionName) {
         List<Product> products = productRepository.findByMissionName(missionName);
         return products;
     }
 
     @Override
+    @Transactional
     public List<Product> getProductByType(ImageryType imageryType) {
         List<Product> products = productRepository.findByMission_Type(imageryType);
         return products;
     }
 
     @Override
+    @Transactional
     public List<Product> getProductBetweenDates(ZonedDateTime startDate, ZonedDateTime endDate) {
         return productRepository.findByMissionBetween(startDate, endDate);
     }
 
     @Override
+    @Transactional
     public List<Product> getProductLessThenDate(ZonedDateTime date) {
         return productRepository.findByMissionLessThan(date);
     }
 
     @Override
+    @Transactional
     public List<Product> getProductGreaterThenDate(ZonedDateTime date) {
         return productRepository.findByMissionGreaterThan(date);
     }
 
     @Override
+    @Transactional
     public List<Product> getProductByFootprintCoordinate(double latitude, double longitude) {
         List<Product> products = productRepository.findByFootprint_Coordinates(latitude, longitude);
         return products;
     }
 
     @Override
+    @Transactional
     public List<Product> getMostOrderedProducts() {
         return productRepository.findMostOrdered();
     }

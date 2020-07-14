@@ -1,6 +1,6 @@
 package com.example.spaceagency.configuration.security.services;
 
-import com.example.spaceagency.model.User.User;
+import com.example.spaceagency.model.securityuser.SecurityUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -34,16 +34,16 @@ public class UserDetailsImpl implements UserDetails {
         this.authorities = authorities;
     }
 
-    public static UserDetailsImpl build(User user) {
-        List<GrantedAuthority> authorities = user.getRoles().stream()
+    public static UserDetailsImpl build(SecurityUser securityUser) {
+        List<GrantedAuthority> authorities = securityUser.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName().name()))
                 .collect(Collectors.toList());
 
         return new UserDetailsImpl(
-                user.getId(),
-                user.getUsername(),
-                user.getEmail(),
-                user.getPassword(),
+                securityUser.getId(),
+                securityUser.getUsername(),
+                securityUser.getEmail(),
+                securityUser.getPassword(),
                 authorities);
     }
 

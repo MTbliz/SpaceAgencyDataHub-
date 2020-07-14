@@ -1,5 +1,16 @@
 INSERT INTO public.roles(id, name) VALUES (10001, 'ROLE_USER'), (10002,'ROLE_MODERATOR'), (10003,'ROLE_ADMIN');
-INSERT INTO public.users(id, first_name, last_name, email, password, username) VALUES (10001,'Piotr', 'Tur', 'piotrturlinski@test.pl', '$2a$10$S4l.zkuCbktuRUc2l5weaO1y/svC5NIMmSWkcG1nCH3EzDD5RMU9e', 'Piotr Turliński');
-INSERT INTO public.users(id, first_name, last_name,  email, password, username) VALUES (10002, 'Michal', 'Tur', 'michalturlinski@test.pl', '$2a$10$S4l.zkuCbktuRUc2l5weaO1y/svC5NIMmSWkcG1nCH3EzDD5RMU9e', 'Michał Turliński');
+INSERT INTO public.app_user(id, address, email, first_name, last_name) VALUES (10001, 'address1', 'jankowalski@test.pl', 'Jan', 'Kowalski');
+INSERT INTO public.app_user(id, address, email, first_name, last_name) VALUES (10002, 'address2', 'michalkowalski@test.pl', 'Michał', 'Kowalski');
+INSERT INTO public.app_user(id, address, email, first_name, last_name) VALUES (10003, 'address3', 'user@test.pl', 'User', 'User');
+INSERT INTO public.app_user(id, address, email, first_name, last_name) VALUES (10004, 'address4', 'moderator@test.pl', 'Moderator', 'Moderator');
+INSERT INTO public.app_user(id, address, email, first_name, last_name) VALUES (10005, 'address5', 'admin@test.pl', 'Admin', 'Admin');
+INSERT INTO public.users(id, email, password, username, app_user_id) VALUES (10001, 'jankowalski@test.pl', '$2a$10$S4l.zkuCbktuRUc2l5weaO1y/svC5NIMmSWkcG1nCH3EzDD5RMU9e', 'Jan Kowalski',10001);
+INSERT INTO public.users(id, email, password, username, app_user_id) VALUES (10002, 'michalkowalski@test.pl', '$2a$10$S4l.zkuCbktuRUc2l5weaO1y/svC5NIMmSWkcG1nCH3EzDD5RMU9e', 'Michał Kowalski',10002);
+INSERT INTO public.users(id, email, password, username, app_user_id) VALUES (10003, 'user@test.pl', '$2a$10$S4l.zkuCbktuRUc2l5weaO1y/svC5NIMmSWkcG1nCH3EzDD5RMU9e', 'User',10003);
+INSERT INTO public.users(id, email, password, username, app_user_id) VALUES (10004, 'moderator@test.pl', '$2a$10$S4l.zkuCbktuRUc2l5weaO1y/svC5NIMmSWkcG1nCH3EzDD5RMU9e', 'Moderator',10004);
+INSERT INTO public.users(id, email, password, username, app_user_id) VALUES (10005, 'admin@test.pl', '$2a$10$S4l.zkuCbktuRUc2l5weaO1y/svC5NIMmSWkcG1nCH3EzDD5RMU9e', 'Admin',10005);
 INSERT INTO public.user_roles(user_id, role_id) VALUES (10001, 10003);
 INSERT INTO public.user_roles(user_id, role_id) VALUES (10002, 10003);
+INSERT INTO public.user_roles(user_id, role_id) VALUES (10003, 10001);
+INSERT INTO public.user_roles(user_id, role_id) VALUES (10004, 10002);
+INSERT INTO public.user_roles(user_id, role_id) VALUES (10005, 10003);

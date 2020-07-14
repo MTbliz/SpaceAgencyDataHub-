@@ -16,4 +16,6 @@ public interface OrderService {
     Iterable<CustomerOrder> getAllOrders();
 
     List<CustomerOrder> getOrdersByCustomer(String firstName, String lastName);
+
+    List<CustomerOrder> getOrdersByCustomerId(Long id);
 }

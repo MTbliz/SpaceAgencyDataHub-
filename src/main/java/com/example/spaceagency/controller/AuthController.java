@@ -1,7 +1,7 @@
 package com.example.spaceagency.controller;
 
 import com.example.spaceagency.configuration.security.services.RegisterService;
-import com.example.spaceagency.model.User.User;
+import com.example.spaceagency.model.securityuser.SecurityUser;
 import com.example.spaceagency.model.securitypayload.request.LoginRequest;
 import com.example.spaceagency.model.securitypayload.request.SignupRequest;
 import com.example.spaceagency.model.securitypayload.response.JwtResponse;
@@ -40,11 +40,12 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<MessageResponse> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-        User user = new User(signUpRequest.getFirstName(),signUpRequest.getLastName(), signUpRequest.getUsername(),
+        SecurityUser securityUser = new SecurityUser(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()));
+                encoder.encode(signUpRequest.getPassword()),
+                signUpRequest.getAppUser());
         Set<String> strRoles = signUpRequest.getRole();
-        ResponseEntity<MessageResponse> responseEntity = registerService.registerUser(user, strRoles);
+        ResponseEntity<MessageResponse> responseEntity = registerService.registerUser(securityUser, strRoles);
         return responseEntity;
     }
 }

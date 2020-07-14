@@ -40,6 +40,15 @@ public class Mission {
         this.fileDb = fileDb;
     }
 
+    public Mission(Long id, String name, ImageryType type, ZonedDateTime startDate, ZonedDateTime finishDate, FileDb fileDb) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.startDate = startDate;
+        this.finishDate = finishDate;
+        this.fileDb = fileDb;
+    }
+
     public Long getId() {
         return id;
     }

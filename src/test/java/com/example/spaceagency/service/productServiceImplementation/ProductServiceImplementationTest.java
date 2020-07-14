@@ -171,4 +171,10 @@ class ProductServiceImplementationTest {
         Assertions.assertEquals("url", productService.getProductByURL(url).getUrl());
     }
 
+    @Test
+    void getAllProductsWithoutFileTest(){
+        productService.getAllProductsWithoutFile();
+        verify(productRepository, times(1)).findAllProductsWithoutFile();
+    }
+
 }

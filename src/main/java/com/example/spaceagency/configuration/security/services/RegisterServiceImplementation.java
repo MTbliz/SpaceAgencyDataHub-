@@ -1,9 +1,9 @@
 package com.example.spaceagency.configuration.security.services;
 
-import com.example.spaceagency.model.User.User;
+import com.example.spaceagency.model.securityuser.SecurityUser;
 import com.example.spaceagency.model.securitypayload.response.JwtResponse;
 import com.example.spaceagency.model.securitypayload.response.MessageResponse;
-import com.example.spaceagency.repository.UserRepository;
+import com.example.spaceagency.repository.SecurityUserRepository;
 import com.example.spaceagency.configuration.security.jwt.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Service
 public class RegisterServiceImplementation implements RegisterService {
 
-    private UserRepository userRepository;
+    private SecurityUserRepository securityUserRepository;
 
     private RegisterServiceValidator registerServiceValidator;
 
@@ -29,28 +29,28 @@ public class RegisterServiceImplementation implements RegisterService {
     private JwtUtils jwtUtils;
 
     @Autowired
-    public RegisterServiceImplementation(UserRepository userRepository, RegisterServiceValidator registerServiceValidator, AuthenticationManager authenticationManager, JwtUtils jwtUtils){
-        this.userRepository = userRepository;
+    public RegisterServiceImplementation(SecurityUserRepository securityUserRepository, RegisterServiceValidator registerServiceValidator, AuthenticationManager authenticationManager, JwtUtils jwtUtils){
+        this.securityUserRepository = securityUserRepository;
         this.registerServiceValidator = registerServiceValidator;
         this.authenticationManager = authenticationManager;
         this.jwtUtils = jwtUtils;
     }
 
     @Override
-    public ResponseEntity<MessageResponse> registerUser(User user, Set<String> strRoles) {
+    public ResponseEntity<MessageResponse> registerUser(SecurityUser securityUser, Set<String> strRoles) {
 
-        if (userRepository.existsByUsername(user.getUsername())) {
+        if (securityUserRepository.existsByUsername(securityUser.getUsername())) {
 
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Username is already taken!"));
         }
-        if (userRepository.existsByEmail(user.getEmail())) {
+        if (securityUserRepository.existsByEmail(securityUser.getEmail())) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Email is already in use!"));
         }
-        registerServiceValidator.onSaveUserRolesValidate(user, strRoles);
+        registerServiceValidator.onSaveUserRolesValidate(securityUser, strRoles);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }

@@ -34,7 +34,12 @@ public class OrderController {
         return orderService.getOrdersByCustomer(firstName, lastName);
     }
 
-    @PostMapping("/create")
+    @RequestMapping("/myorders/{id}")
+    public List<CustomerOrder> getOrderByCustomerId(@PathVariable Long id) {
+        return orderService.getOrdersByCustomerId(id);
+    }
+
+    @PostMapping()
     public CustomerOrder createOrder(@RequestBody CustomerOrder customerOrder) {
         CustomerOrder createdOrder = orderService.create(customerOrder);
         LOG.info("Order with id: " + createdOrder.getId() +  " created.");

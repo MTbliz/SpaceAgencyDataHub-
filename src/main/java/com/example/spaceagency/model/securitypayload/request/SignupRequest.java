@@ -1,22 +1,19 @@
 package com.example.spaceagency.model.securitypayload.request;
 
+import com.example.spaceagency.model.AppUser;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Set;
 
 public class SignupRequest {
 
-    @NotNull
-    private String firstName;
-
-    @NotNull
-    private String lastName;
-
     @NotBlank
     @Size(min = 3, max = 20)
     private String username;
+
+    private AppUser appUser;
 
     @NotBlank
     @Size(max = 50)
@@ -29,21 +26,6 @@ public class SignupRequest {
     @Size(min = 6, max = 40)
     private String password;
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 
     public String getUsername() {
         return username;
@@ -51,6 +33,14 @@ public class SignupRequest {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public AppUser getAppUser() {
+        return appUser;
+    }
+
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
     }
 
     public String getEmail() {

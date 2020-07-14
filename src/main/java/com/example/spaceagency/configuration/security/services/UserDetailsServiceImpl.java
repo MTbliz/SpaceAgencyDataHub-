@@ -1,7 +1,7 @@
 package com.example.spaceagency.configuration.security.services;
 
-import com.example.spaceagency.model.User.User;
-import com.example.spaceagency.repository.UserRepository;
+import com.example.spaceagency.model.securityuser.SecurityUser;
+import com.example.spaceagency.repository.SecurityUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,19 +12,19 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private UserRepository userRepository;
+    private SecurityUserRepository securityUserRepository;
 
     @Autowired
-    public UserDetailsServiceImpl(UserRepository userRepository){
-        this.userRepository = userRepository;
+    public UserDetailsServiceImpl(SecurityUserRepository securityUserRepository){
+        this.securityUserRepository = securityUserRepository;
     }
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username)
+        SecurityUser securityUser = securityUserRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
 
-        return UserDetailsImpl.build(user);
+        return UserDetailsImpl.build(securityUser);
     }
 }

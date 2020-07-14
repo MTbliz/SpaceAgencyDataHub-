@@ -5,6 +5,8 @@ import com.example.spaceagency.repository.OrderRepository;
 import com.example.spaceagency.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -47,6 +49,7 @@ public class OrderServiceImplementation implements OrderService {
     }
 
     @Override
+    @Transactional
     public List<CustomerOrder> getOrdersByCustomer(String firstName, String lastName) {
         List<CustomerOrder> orders = orderRepository.findByCustomer_LastName(lastName);
         List<CustomerOrder> filteredOrders = orders.stream()
@@ -55,4 +58,13 @@ public class OrderServiceImplementation implements OrderService {
         filteredOrders.sort(Comparator.comparing(order -> order.getOrderDate()));
         return filteredOrders;
     }
+
+    @Override
+    @Transactional
+    public List<CustomerOrder> getOrdersByCustomerId(Long id) {
+        List<CustomerOrder> orders = orderRepository.findByCustomerId(id);
+        orders.sort(Comparator.comparing(order -> order.getOrderDate()));
+        return orders;
+    }
+
 }

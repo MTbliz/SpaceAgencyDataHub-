@@ -2,11 +2,12 @@ package com.example.spaceagency.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.Set;
 
 @Entity
-public class CustomerOrder {
+public class CustomerOrder implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,10 +15,10 @@ public class CustomerOrder {
     private Long id;
 
     @ManyToOne()
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
+    @JoinColumn(name = "app_user_id")
+    private AppUser customer;
 
-    @ManyToMany()
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "order_products",
             joinColumns = @JoinColumn(name = "order_id"),
@@ -30,7 +31,14 @@ public class CustomerOrder {
     public CustomerOrder() {
     }
 
-    public CustomerOrder(Customer customer, Set<Product> productList, ZonedDateTime orderDate) {
+    public CustomerOrder(AppUser customer, Set<Product> productList, ZonedDateTime orderDate) {
+        this.customer = customer;
+        this.productList = productList;
+        this.orderDate = orderDate;
+    }
+
+    public CustomerOrder(Long id, AppUser customer, Set<Product> productList, ZonedDateTime orderDate) {
+        this.id = id;
         this.customer = customer;
         this.productList = productList;
         this.orderDate = orderDate;
@@ -44,7 +52,7 @@ public class CustomerOrder {
         return productList;
     }
 
-    public Customer getCustomer() {
+    public AppUser getCustomer() {
         return customer;
     }
 

@@ -34,7 +34,7 @@ public class ProductSearchController {
     }
 
     @RequestMapping("/type")
-    public List<Product> getProductsByProductType(ImageryType productType) {
+    public List<Product> getProductsByProductType(@RequestParam(value = "productType") ImageryType productType) {
         LOG.info("All products filtered by ProductType received.");
         return productService.getProductByType(productType);
     }

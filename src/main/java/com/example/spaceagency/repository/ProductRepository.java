@@ -29,13 +29,13 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     @Query(value = "from Product p where p.acquisitionDate < :date")
     List<Product> findByMissionLessThan(@Param("date") ZonedDateTime date);
 
-    @Query(value = "SELECT product_id, acquisitionDate, price, url, footprint_id, mission_id FROM product " +
+    @Query(value = "SELECT product_id, acquisition_date, price, url, footprint_id, mission_id, file_db_id FROM product " +
             "WHERE footprint_id IN (SELECT COORDINATES_footprint_id FROM COORDINATE " +
             "WHERE LATITUDE = :latitude AND LONGITUDE = :longitude )"
             , nativeQuery = true)
     List<Product> findByFootprint_Coordinates(@Param("latitude") double latitude, @Param("longitude") double longitude);
 
-    @Query(value = "SELECT product_id, acquisitionDate, price, url, footprint_id, mission_id FROM product " +
+    @Query(value = "SELECT product_id, acquisition_date, price, url, footprint_id, mission_id, file_db_id FROM product " +
             "WHERE product_id " +
             "IN( SELECT product_id FROM order_products GROUP BY product_id HAVING COUNT(product_id) = " +
             "(SELECT COUNT(product_id) count FROM order_products GROUP BY product_id ORDER BY count DESC LIMIT 1));"
