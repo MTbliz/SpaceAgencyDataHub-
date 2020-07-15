@@ -29,7 +29,7 @@ public class RegisterServiceImplementation implements RegisterService {
     private JwtUtils jwtUtils;
 
     @Autowired
-    public RegisterServiceImplementation(SecurityUserRepository securityUserRepository, RegisterServiceValidator registerServiceValidator, AuthenticationManager authenticationManager, JwtUtils jwtUtils){
+    public RegisterServiceImplementation(SecurityUserRepository securityUserRepository, RegisterServiceValidator registerServiceValidator, AuthenticationManager authenticationManager, JwtUtils jwtUtils) {
         this.securityUserRepository = securityUserRepository;
         this.registerServiceValidator = registerServiceValidator;
         this.authenticationManager = authenticationManager;

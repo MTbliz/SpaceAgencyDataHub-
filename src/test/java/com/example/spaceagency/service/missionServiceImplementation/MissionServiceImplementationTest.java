@@ -19,6 +19,7 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 import static org.mockito.Mockito.*;
 
 
@@ -42,7 +43,7 @@ class MissionServiceImplementationTest {
         Mission mission = new Mission("test.pdf", ImageryType.TYPE_HYPERSPECTRAL, ZonedDateTime.parse("2016-09-13T22:30:52.123+02:00"),
                 ZonedDateTime.parse("2016-09-13T22:30:52.123+02:00"), new FileDb());
         when(missionRepository.save(mission)).thenReturn(mission);
-        Assertions.assertEquals(mission,missionService.create(mission));
+        Assertions.assertEquals(mission, missionService.create(mission));
     }
 
     @Test
@@ -58,14 +59,14 @@ class MissionServiceImplementationTest {
     void updateTest() throws MissionAlredyExistException {
         Mission mission = new Mission();
         when(missionRepository.save(mission)).thenReturn(mission);
-        Assertions.assertEquals(mission,missionService.update(mission));
+        Assertions.assertEquals(mission, missionService.update(mission));
     }
 
     @Test
     void deleteTest() {
         long id = 1;
         missionService.delete(id);
-        verify(missionRepository,times(1)).deleteById((long) 1);
+        verify(missionRepository, times(1)).deleteById((long) 1);
     }
 
     @Test
@@ -75,6 +76,6 @@ class MissionServiceImplementationTest {
         missions.add(mission);
         Iterable<Mission> iterable = missions;
         when(missionRepository.findAll()).thenReturn(iterable);
-        Assertions.assertEquals(1,((List<Mission>) missionService.getAllMissions()).size());
+        Assertions.assertEquals(1, ((List<Mission>) missionService.getAllMissions()).size());
     }
 }

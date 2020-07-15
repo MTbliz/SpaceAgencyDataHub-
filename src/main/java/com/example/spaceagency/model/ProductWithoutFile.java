@@ -2,12 +2,10 @@ package com.example.spaceagency.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 
 public class ProductWithoutFile {
-
 
     private Long id;
 

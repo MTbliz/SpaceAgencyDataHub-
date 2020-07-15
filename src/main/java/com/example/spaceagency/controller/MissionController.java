@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.time.ZonedDateTime;
 
 
@@ -49,11 +48,11 @@ public class MissionController {
                                  @RequestParam("type") ImageryType type,
                                  @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime startDate,
                                  @RequestParam("finishDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime finishDate
-                                 ) throws MissionAlredyExistException, FileDbStorageException, IOException {
+    ) throws MissionAlredyExistException, FileDbStorageException, IOException {
         FileDb fileDb = new FileDb(name, file.getContentType(), file.getBytes());
         Mission mission = new Mission(name, type, startDate, finishDate, fileDb);
         Mission createdMission = missionService.create(mission);
-        LOG.info("Mission with id: " + createdMission.getId() + " received.");
+        LOG.info("Mission with id: " + createdMission.getId() + " created.");
         return createdMission;
     }
 

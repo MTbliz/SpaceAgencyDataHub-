@@ -102,7 +102,7 @@ class MissionControllerTest {
     }
 
     @Test
-    void updateMissionTest() throws Exception  {
+    void updateMissionTest() throws Exception {
         byte[] fileContent = "bar".getBytes(StandardCharsets.UTF_8);
         MockMultipartFile filePart = new MockMultipartFile("file", "orig", null, fileContent);
         FileDb fileDb = new FileDb("Test File", filePart.getContentType(), filePart.getBytes());
@@ -112,8 +112,8 @@ class MissionControllerTest {
                 null, fileDb);
         when(missionService.update(any(Mission.class))).thenReturn(mission);
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.put("/missions/1")
-        .content(objectMapper.writeValueAsString(mission))
-        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .content(objectMapper.writeValueAsString(mission))
+                .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andReturn();
         String response = mvcResult.getResponse().getContentAsString();

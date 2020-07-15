@@ -15,15 +15,15 @@ public class AppUserServiceImplementation implements AppUserService {
     private AppUserRepository appUserRepository;
 
     @Autowired
-    public AppUserServiceImplementation(AppUserRepository appUserRepository){
+    public AppUserServiceImplementation(AppUserRepository appUserRepository) {
         this.appUserRepository = appUserRepository;
     }
 
-    public AppUser saveAppUser(AppUser newAppUser){
+    public AppUser saveAppUser(AppUser newAppUser) {
         return appUserRepository.save(newAppUser);
     }
 
-    public Iterable<AppUser> getAppUsers(){
+    public Iterable<AppUser> getAppUsers() {
         return appUserRepository.findAll();
     }
 
@@ -34,7 +34,7 @@ public class AppUserServiceImplementation implements AppUserService {
 
     public AppUser updateAppUser(AppUser appUserToUpdate) throws AppUserNotFoundException {
         Optional<AppUser> loadedAppUser = appUserRepository.findById(appUserToUpdate.getId());
-        if (loadedAppUser.isPresent()){
+        if (loadedAppUser.isPresent()) {
             return appUserRepository.save(appUserToUpdate);
         } else {
             throw new AppUserNotFoundException(appUserToUpdate.getId());

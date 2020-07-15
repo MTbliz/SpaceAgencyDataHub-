@@ -23,12 +23,13 @@ public class MissionServiceImplementation implements MissionService {
     }
 
     @Override
+    @Transactional
     public Mission create(Mission mission) throws MissionAlredyExistException, FileDbStorageException {
         // Check if the file's name contains invalid characters
         if (mission.getName().contains("..")) {
             throw new FileDbStorageException("Sorry! Filename contains invalid path sequence " + mission.getName());
         }
-            List<Mission> missions = missionRepository.findAllByName(mission.getName());
+        List<Mission> missions = missionRepository.findAllByName(mission.getName());
         if (missions.size() == 0) {
             return missionRepository.save(mission);
         } else {

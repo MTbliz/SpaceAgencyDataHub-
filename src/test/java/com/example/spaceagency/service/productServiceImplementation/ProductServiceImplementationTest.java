@@ -3,7 +3,6 @@ package com.example.spaceagency.service.productServiceImplementation;
 import com.example.spaceagency.exception.FileDbStorageException;
 import com.example.spaceagency.exception.ProductNotFoundException;
 import com.example.spaceagency.model.*;
-import com.example.spaceagency.repository.OrderRepository;
 import com.example.spaceagency.repository.ProductRepository;
 import com.example.spaceagency.service.ProductService;
 import org.junit.jupiter.api.Assertions;
@@ -18,7 +17,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
-import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -164,7 +162,7 @@ class ProductServiceImplementationTest {
 
     @Test
     void getProductByURL() throws ProductNotFoundException {
-        String url="url";
+        String url = "url";
         Product product = new Product(new Mission(), ZonedDateTime.parse("2016-09-13T22:30:52.123+02:00"),
                 new Footprint(), BigDecimal.ONE, new FileDb(), url);
         when(productRepository.findByUrl(url)).thenReturn(Optional.of(product));
@@ -172,7 +170,7 @@ class ProductServiceImplementationTest {
     }
 
     @Test
-    void getAllProductsWithoutFileTest(){
+    void getAllProductsWithoutFileTest() {
         productService.getAllProductsWithoutFile();
         verify(productRepository, times(1)).findAllProductsWithoutFile();
     }

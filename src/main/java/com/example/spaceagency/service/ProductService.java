@@ -4,12 +4,9 @@ import com.example.spaceagency.exception.FileDbStorageException;
 import com.example.spaceagency.exception.ProductNotFoundException;
 import com.example.spaceagency.model.ImageryType;
 import com.example.spaceagency.model.Product;
-import com.example.spaceagency.model.ProductWithoutFile;
 
-import javax.swing.text.html.Option;
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Optional;
 
 public interface ProductService {
 

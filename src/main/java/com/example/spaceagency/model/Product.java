@@ -2,6 +2,7 @@ package com.example.spaceagency.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
@@ -20,7 +21,6 @@ public class Product {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     private ZonedDateTime acquisitionDate;
-
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "footprint_id", referencedColumnName = "footprint_id")

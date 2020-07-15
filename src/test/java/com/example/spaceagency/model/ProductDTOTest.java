@@ -10,8 +10,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 class ProductDTOTest {
@@ -25,11 +23,8 @@ class ProductDTOTest {
         Coordinate coordinate3 = new Coordinate(1, 2);
         Coordinate coordinate4 = new Coordinate(1, 2);
 
-        //ProductDTO productDTO = new ProductDTO(new Mission(), date, new FootprintDTO(coordinate1, coordinate2, coordinate3, coordinate4), new BigDecimal(1000), "tesURL");
-       // Product product = new Product(new Mission(), date, new Footprint(), new BigDecimal(1000), "tesURL");
-
         ProductDTO productDTO = new ProductDTO(new Mission(), date, new FootprintDTO(coordinate1, coordinate2, coordinate3, coordinate4), new BigDecimal(1000), new FileDb(), "tesURL");
-         Product product = new Product(new Mission(), date, new Footprint(), new BigDecimal(1000), new FileDb(), "tesURL");
+        Product product = new Product(new Mission(), date, new Footprint(), new BigDecimal(1000), new FileDb(), "tesURL");
 
         Product result = productDTO.transferProductDTOtoProduct();
 

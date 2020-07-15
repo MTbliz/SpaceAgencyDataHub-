@@ -15,7 +15,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private SecurityUserRepository securityUserRepository;
 
     @Autowired
-    public UserDetailsServiceImpl(SecurityUserRepository securityUserRepository){
+    public UserDetailsServiceImpl(SecurityUserRepository securityUserRepository) {
         this.securityUserRepository = securityUserRepository;
     }
 

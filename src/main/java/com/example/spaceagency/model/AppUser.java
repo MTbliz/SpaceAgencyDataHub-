@@ -29,10 +29,7 @@ public class AppUser {
     @Size(max = 50)
     @Email
     private String email;
-    //@NotNull
-    //@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    //@JoinColumn(name = "address_id")
-    //private Address address;
+
     private String address;
 
     public AppUser() {

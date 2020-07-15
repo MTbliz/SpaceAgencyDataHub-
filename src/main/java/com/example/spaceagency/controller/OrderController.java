@@ -36,13 +36,14 @@ public class OrderController {
 
     @RequestMapping("/myorders/{id}")
     public List<CustomerOrder> getOrderByCustomerId(@PathVariable Long id) {
+        LOG.info("All orders for customer with id: " + id + " received.");
         return orderService.getOrdersByCustomerId(id);
     }
 
     @PostMapping()
     public CustomerOrder createOrder(@RequestBody CustomerOrder customerOrder) {
         CustomerOrder createdOrder = orderService.create(customerOrder);
-        LOG.info("Order with id: " + createdOrder.getId() +  " created.");
+        LOG.info("Order with id: " + createdOrder.getId() + " created.");
         return createdOrder;
     }
 }

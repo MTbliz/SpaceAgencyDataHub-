@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -43,10 +44,10 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     List<Product> findMostOrdered();
 
     @Modifying
-    @Query( "update Product p set p.url = :url where p.id = :id")
+    @Query("update Product p set p.url = :url where p.id = :id")
     void updateProductURL(@Param("id") Long id, @Param("url") String url);
 
 
-    @Query( value = "SELECT product_id, acquisition_date, price, url, null as file_db_id, footprint_id, mission_id FROM product", nativeQuery = true)
+    @Query(value = "SELECT product_id, acquisition_date, price, url, null as file_db_id, footprint_id, mission_id FROM product", nativeQuery = true)
     List<Product> findAllProductsWithoutFile();
 }

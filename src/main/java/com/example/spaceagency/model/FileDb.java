@@ -4,8 +4,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
-import static javax.persistence.FetchType.LAZY;
-
 @Entity
 @Table(name = "filedb")
 public class FileDb {
@@ -23,9 +21,13 @@ public class FileDb {
     @Lob
     private byte[] data;
 
-    public FileDb(Long id) { }
+    public FileDb(Long id) {
+    }
 
-    public FileDb(){};
+    public FileDb() {
+    }
+
+    ;
 
     public FileDb(String fileName, String fileType, byte[] data) {
         this.fileName = fileName;

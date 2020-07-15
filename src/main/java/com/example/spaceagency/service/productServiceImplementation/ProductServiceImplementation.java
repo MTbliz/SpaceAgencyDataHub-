@@ -1,6 +1,5 @@
 package com.example.spaceagency.service.productServiceImplementation;
 
-import com.example.spaceagency.exception.FileDbNotFoundException;
 import com.example.spaceagency.exception.FileDbStorageException;
 import com.example.spaceagency.exception.ProductNotFoundException;
 import com.example.spaceagency.model.*;
@@ -101,8 +100,8 @@ public class ProductServiceImplementation implements ProductService {
 
     @Override
     @Transactional
-    public void updateProductURL(Long id, String urlString){
-         productRepository.updateProductURL(id, urlString);
+    public void updateProductURL(Long id, String urlString) {
+        productRepository.updateProductURL(id, urlString);
     }
 
 

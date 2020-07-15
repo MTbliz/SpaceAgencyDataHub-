@@ -1,11 +1,9 @@
 package com.example.spaceagency.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.ZonedDateTime;
-import java.util.List;
-import java.util.Set;
 
 @Entity
 public class Mission {
@@ -26,11 +24,14 @@ public class Mission {
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     private ZonedDateTime finishDate;
 
-    @OneToOne( cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn
     private FileDb fileDb;
 
-    public Mission(){};
+    public Mission() {
+    }
+
+    ;
 
     public Mission(String name, ImageryType type, ZonedDateTime startDate, ZonedDateTime finishDate, FileDb fileDb) {
         this.name = name;

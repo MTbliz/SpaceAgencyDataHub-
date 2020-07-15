@@ -1,6 +1,7 @@
 package com.example.spaceagency.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
@@ -50,6 +51,7 @@ public class CustomerOrder implements Serializable {
         this.customer = customer;
         this.productList = productList;
     }
+
     public Long getId() {
         return id;
     }

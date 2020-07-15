@@ -2,13 +2,8 @@ package com.example.spaceagency.service.fileDbDownloadServiceImplementation;
 
 import com.example.spaceagency.exception.FileDbNotFoundException;
 import com.example.spaceagency.model.FileDb;
-import com.example.spaceagency.model.Footprint;
-import com.example.spaceagency.model.Mission;
-import com.example.spaceagency.model.Product;
 import com.example.spaceagency.repository.FileDbRepository;
-import com.example.spaceagency.repository.ProductRepository;
 import com.example.spaceagency.service.FileDbDownloadService;
-import com.example.spaceagency.service.ProductService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -19,12 +14,9 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
-import java.time.ZonedDateTime;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
@@ -49,7 +41,7 @@ class FileDbDownloadServiceImplementationTest {
         FileDb fileDb = new FileDb("Test File", filePart.getContentType(), filePart.getBytes());
 
         when(fileDbRepository.findById(id)).thenReturn(Optional.of(fileDb));
-        Assertions.assertEquals(fileDb,fileDbDownloadService.getFileDb(id));
+        Assertions.assertEquals(fileDb, fileDbDownloadService.getFileDb(id));
     }
 
     @Test
@@ -60,7 +52,7 @@ class FileDbDownloadServiceImplementationTest {
         FileDb fileDb = new FileDb("Test File", filePart.getContentType(), filePart.getBytes());
 
         when(fileDbRepository.findByUrl(url)).thenReturn(Optional.of(fileDb));
-        Assertions.assertEquals(fileDb,fileDbDownloadService.getFileDbByUrl(url));
+        Assertions.assertEquals(fileDb, fileDbDownloadService.getFileDbByUrl(url));
     }
 
 }

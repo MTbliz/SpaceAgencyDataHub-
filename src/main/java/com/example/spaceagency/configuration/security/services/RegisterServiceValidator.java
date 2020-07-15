@@ -19,7 +19,7 @@ public class RegisterServiceValidator {
     private RoleRepository roleRepository;
 
     @Autowired
-    public RegisterServiceValidator(SecurityUserRepository securityUserRepository, RoleRepository roleRepository){
+    public RegisterServiceValidator(SecurityUserRepository securityUserRepository, RoleRepository roleRepository) {
         this.securityUserRepository = securityUserRepository;
         this.roleRepository = roleRepository;
     }

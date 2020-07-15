@@ -56,16 +56,16 @@ public class ProductController {
                                  @RequestParam("footprint") String footprintString,
                                  @RequestParam("price") BigDecimal price
 
-                                 ) throws FileDbStorageException, IOException {
+    ) throws FileDbStorageException, IOException {
         ObjectMapper mapper = new ObjectMapper();
         Mission mission = mapper.readValue(missionString, Mission.class);
         FootprintDTO footprint = mapper.readValue(footprintString, FootprintDTO.class);
         FileDb fileDb = new FileDb(file.getOriginalFilename(), file.getContentType(), file.getBytes());
-        ProductDTO productDTO = new ProductDTO(mission, acquisitionDate, footprint, price, fileDb,"");
+        ProductDTO productDTO = new ProductDTO(mission, acquisitionDate, footprint, price, fileDb, "");
         Product createdProduct = productService.create(productDTO.transferProductDTOtoProduct());
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("downloadFile/" + fileDb.getId() + "/" + fileDb.getFileName() )
+                .path("downloadFile/" + fileDb.getId() + "/" + fileDb.getFileName())
                 .toUriString();
 
         productService.updateProductURL(createdProduct.getId(), fileDownloadUri);
@@ -77,6 +77,6 @@ public class ProductController {
     @DeleteMapping("/{id}")
     public void deleteProduct(@PathVariable Long id) {
         productService.delete(id);
-        LOG.info("Product with id: " + id +" deleted.");
+        LOG.info("Product with id: " + id + " deleted.");
     }
 }
