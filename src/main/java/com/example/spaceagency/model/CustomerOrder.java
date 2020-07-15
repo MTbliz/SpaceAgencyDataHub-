@@ -44,6 +44,12 @@ public class CustomerOrder implements Serializable {
         this.orderDate = orderDate;
     }
 
+
+    public CustomerOrder(Long id, AppUser customer, Set<Product> productList) {
+        this.id = id;
+        this.customer = customer;
+        this.productList = productList;
+    }
     public Long getId() {
         return id;
     }

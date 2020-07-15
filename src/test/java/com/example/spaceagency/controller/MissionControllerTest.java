@@ -96,8 +96,6 @@ class MissionControllerTest {
     @Test
     void deleteMissionTest() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
-        Mission mission = new Mission("test.pdf", ImageryType.TYPE_HYPERSPECTRAL, null,
-                null, new FileDb());
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.delete("/missions/1"))
                 .andExpect(status().isOk())
                 .andReturn();

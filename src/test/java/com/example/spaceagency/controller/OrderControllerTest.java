@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -94,6 +95,19 @@ class OrderControllerTest {
 
     @Test
     void createOrderTest() throws Exception {
-
+        ObjectMapper objectMapper = new ObjectMapper();
+        Set<Product> products = new HashSet<>();
+        Product product = new Product();
+        products.add(product);
+        AppUser appUser = new AppUser((long) 1, "Jan", "Kowalski", "kowal@test.com", "address");
+        CustomerOrder customerOrder = new CustomerOrder((long) 1, appUser, products, null);
+        when(orderService.create(any(CustomerOrder.class))).thenReturn(customerOrder);
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/orders")
+                .contentType("application/json")
+                .content(objectMapper.writeValueAsString(customerOrder)))
+                .andExpect(status().isOk())
+                .andReturn();
+        String response = mvcResult.getResponse().getContentAsString();
+        Assertions.assertEquals(objectMapper.writeValueAsString(customerOrder), response);
     }
 }
